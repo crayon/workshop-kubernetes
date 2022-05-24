@@ -1,0 +1,21 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: my-first-cronjob
+spec:
+  schedule: "* * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: hello-world
+            image: crayonworkshop.azurecr.io/bbozic-hello-world:0.0.2
+            env:
+            - name: HELLO_USER
+              value: Bostjan
+            resources:
+              limits:
+                memory: 256Mi
+                cpu: 200m
+          restartPolicy: OnFailure

@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: hello-server-daemon-set
+  labels:
+    app: server
+spec:
+  selector:
+    matchLabels:
+      app: server
+  template:
+    metadata:
+      labels:
+        app: server
+    spec:
+      tolerations:
+      - key: node-role.kubernetes.io/control-plane
+        operator: Exists
+        effect: NoSchedule
+      - key: node-role.kubernetes.io/master
+        operator: Exists
+        effect: NoSchedule
+      containers:
+      - name: hello-server
+        image: crayonworkshop.azurecr.io/bbozic-http-server:0.0.1
+        env:
+        - name: SERVER_PORT
+          value: "5858"
+        ports:
+        - containerPort: 5858
+          name: server
+          protocol: TCP
+        resources:
+          limits:
+            memory: 256Mi
+            cpu: 200m

@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: hello
+  name: my-first-pod
+spec:
+  containers:
+  - name: hello-world
+    image: crayonworkshop.azurecr.io/bbozic-hello-world:0.0.2
+    env:
+    - name: HELLO_USER
+      value: Bostjan
+    resources:
+      limits:
+        memory: 256Mi
+        cpu: 200m

@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: hello-server
+spec:
+  rules:
+    - host: bbozic.crayonworkshop.crayonai.io
+      http:
+        paths:
+        - path: /
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: hello-server
+              port:
+                number: 80
