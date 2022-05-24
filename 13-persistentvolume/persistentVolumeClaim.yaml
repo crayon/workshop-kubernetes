@@ -4,11 +4,11 @@ metadata:
   name: hello-pvc
 spec:
   accessModes:
-  - ReadWriteOnce
+  - ReadWriteMany
   resources:
     requests:
       storage: 5Gi
-  storageClassName: default
+  storageClassName: azurefile
   volumeMode: Filesystem
 ---
 apiVersion: apps/v1
@@ -19,7 +19,7 @@ metadata:
     app: server
     owner: bbozic
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: server
